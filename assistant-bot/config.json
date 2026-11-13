@@ -1,0 +1,14 @@
+{
+    "proxy": "",
+    "use_proxy": false,
+    "telegram_token": "",
+    "jira_password": "",
+    "jira_email": "",
+    "jira_url": "",
+    "gitlab_url": "",
+    "gitlab_token": "",
+    "gitlab_password": "",
+    "max_message_size": 2047,
+    "llm_model": "",
+    "lm_studio_server": ""
+}

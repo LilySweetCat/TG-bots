@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net" />
+    <style>
+        body {
+            padding: 20px;
+            background: white;
+            font-family: sans-serif;
+        }
+
+        .d2h-wrapper {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    @@ -10,6 +10,7 @@ import {
+    createColorThenConditionSelector,
+    getTemplateEvents,
+    } from "../../../../store/template";
+    +import { useFormContext } from "react-hook-form";
+
+    const ColorThenCondition: FC<IColorThenConditionProps> = ({ index }) => {
+        const {
+        @@ -18,6 +19,11 @@ const ColorThenCondition: FC<IColorThenConditionProps> = ({ index }) => {
+            } = useContext(CommonBoPropsContext);
+            const { changeColorRuleProperty } = getTemplateEvents(templateService);
+
+            + // Ни в коем случае не убирать. Ранее у нас компонент FieldAdapterFactory находился в client, но т.к.
+            + // теперь адаптеры перенесены в styleguide, а он в свою очередь используется как mf, то приходится
+            принудительно прокидывать
+            + // control в связи с потерей контекса FormProvider
+            + const { control } = useFormContext();
+            +
+            const colorThenConditionSelector = useMemo(
+            () => createColorThenConditionSelector({ index }),
+            [index]
+            @@ -91,6 +97,7 @@ const ColorThenCondition: FC<IColorThenConditionProps> = ({ index }) => {
+                fieldChange: (fieldName: string, newValue: string) =>
+                handleChange(fieldName, newValue),
+                fieldAdapterConnector,
+                + control,
+                })}
+                </Col>
+                ))}
+
+</body>
+
+</html>
